@@ -30,6 +30,7 @@ let arr1 = arrayOfTimes.sort((a, b) => a.time - b.time);
 let arr = arr1.map(item => item.in);
 maxSum = arr[0];
 currSum = arr[0];
+
 for (i = 1; i < arr.length; i++) {
     if (currSum + arr[i] < arr[i]) {
         currSum = arr[i];

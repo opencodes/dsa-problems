@@ -5,15 +5,14 @@
 // n = 5 
 // A[] = {1,3,5,2,2} 
 
-function equilibriumPoint (arr, n) {
+function equilibriumPointOld (arr, n) {
     let p1 = 0;
     let p2 = n - 1;
     let p1Sum = arr[p1];
     let p2Sum = arr[p2];
     let output = -1;
 
-    while (p2 != p1 && (p1 + p2) <= n) {
-        console.log('p1', p1, 'p2', p2, 'p1Sum', p1Sum, 'p2Sum', p2Sum, n, "(p2 - p1) ", (p2 - p1));
+    while (p1 + 2 !== p2) {
 
         if (p1Sum < p2Sum) {
             p1 += 1;
@@ -23,14 +22,31 @@ function equilibriumPoint (arr, n) {
             p2Sum += arr[p2]
         }
     }
-    console.log('p1', p1, 'p1Sum', p1Sum, 'p2', p2, 'p2Sum', p2Sum, n, "(p2 - p1) ", (p2 - p1));
 
-    if (p2 - p1 == 0 && p1Sum == p2Sum) {
-        output = p1;
+    if (p1Sum == p2Sum) {
+        output = p1 + 1;
     }
 
     return output;
 }
-let arr = "20 17 42 25 32 32 30 32 37 9 2 33 31 17 14 40 9 12 36 21 8 33 6 6 10 37 12 26 21 3".split(' ').map(k => parseInt(k));
-console.log("Output : ", equilibriumPoint(arr, arr.length));
 
+
+function equilibriumPoint (arr, n) {
+    let sum = 0;
+    for (let k = 0; k < n; k++) {
+        console.log(arr[k], sum);
+        sum += arr[k];
+    }
+    let currentSum = 0;
+
+    for (let i = n - 1; i >= 0; i--) {
+        console.log(sum, arr[i], 2 * currentSum);
+        if (sum - arr[i] - (2 * currentSum) == 0) {
+            return i + 1;
+        }
+        currentSum += arr[i];
+    }
+    return -1;
+}
+let arr = [1, 3, 5, 2, 2]
+console.log("Output : ", equilibriumPoint(arr, arr.length));
