@@ -19,25 +19,29 @@ let array = [
     [1015, 1020]
 ];
 
+let arrayOfTimes = [];
 
-let max = 1;
-let curr = 1;
+array.forEach(item => {
+    arrayOfTimes.push({ time: item[0], in: 1 })
+    arrayOfTimes.push({ time: item[1], in: - 1 })
+});
 
-let start = array[0][0];
-let end = array[0][1];
-
-for (let i = 1; i < array.length; i++) {
-    let el = array[i];
-    if ((el[0] > start && el[0] < end) || (el[1] > start && el[1] < end)) {
-        curr += 1;
-        console.log("In the range ", el[0], el[1]);
+let arr1 = arrayOfTimes.sort((a, b) => a.time - b.time);
+let arr = arr1.map(item => item.in);
+maxSum = arr[0];
+currSum = arr[0];
+for (i = 1; i < arr.length; i++) {
+    if (currSum + arr[i] < arr[i]) {
+        currSum = arr[i];
     } else {
-        curr = 0;
+        currSum = currSum + arr[i];
     }
-    if (curr > max) {
-        max = curr
+
+    if (currSum > maxSum) {
+        maxSum = currSum;
     }
-    console.log(curr, max);
 }
 
-console.log("Output", max);
+
+
+console.log("Output", maxSum);
