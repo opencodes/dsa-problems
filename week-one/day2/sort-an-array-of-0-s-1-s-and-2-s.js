@@ -14,6 +14,7 @@ function sort012 (arr, n) {
         let r = arr[j]; // right element
 
         // if left element at index i is 2 move to right
+        // if el = 1
 
         if (arr[i] === 2) {
 
