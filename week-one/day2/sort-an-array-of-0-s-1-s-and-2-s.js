@@ -6,19 +6,29 @@
 
 // [0, 2, 1, 2, 0, 2, 0]
 function sort012 (arr, n) {
-    let i = 0; //pointer 1 on left side
-    let j = n - 1; // pointer 2 from right side
+    let low = 0;
+    let mid = 1;//pointer 1 on left side
+    let high = n - 1; // pointer 2 from right side
 
-    while (i !== j) { // Loop till both pointer reach at same position
-        let l = arr[i]; // left element 
-        let r = arr[j]; // right element
+    while (mid <= high) { // Loop till both pointer reach at same position
+        // case 1 : if el at i is 2 and el at j is 2 swap and decremnt j
 
-        // if left element at index i is 2 move to right
-        // if el = 1
-
-        if (arr[i] === 2) {
-
+        if (arr[mid] === 0) {
+            let temp = arr[low];
+            arr[low] = arr[mid];
+            arr[mid] = temp;
+            low++;
+            mid++;
+        } else if (arr[mid] === 2) {
+            let temp = arr[high];
+            arr[high] = arr[mid];
+            arr[mid] = temp;
+            high--;
+        } else {
+            mid++;
         }
     }
-
+    return arr;
 }
+
+console.log(sort012([0, 2, 1, 2, 0, 2, 0], 7));
