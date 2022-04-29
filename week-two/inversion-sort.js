@@ -1,5 +1,7 @@
 
 class Solution {
+    count = 0;
+
     merge (arr, l, m, r) {
         let n1 = m - l + 1;
         let n2 = r - m;
@@ -23,6 +25,7 @@ class Solution {
                 li++;
             } else {
                 arr[k] = arrRight[ri];
+                this.count += (n1 - li);
                 ri++;
             }
             k++;
@@ -40,6 +43,7 @@ class Solution {
         }
     }
     mergeSort (arr, l, r) {
+
         let m = l + parseInt((r - l) / 2);
         if (l >= r) {
             return;
@@ -47,31 +51,14 @@ class Solution {
         this.mergeSort(arr, l, m);
         this.mergeSort(arr, m + 1, r);
         this.merge(arr, l, m, r)
-        return arr;
+        return this.count;
     }
     // Function to count inversions in the array.
     inversionCount (arr, n) {
-        let sortedArr = this.mergeSort([...arr], 0, n - 1);
-        let inversionCount = 0;
-        console.log(sortedArr, sortedArr.length);
-        console.log(arr, arr.length);
-        for (let i = 0; i < sortedArr.length; i++) {
-            const el = sortedArr[i];
-            let j = 0;
-            while (arr[j] !== el) {
-
-                if (arr[j] > el) {
-                    console.log(inversionCount, arr[j], el);
-                    inversionCount++;
-                }
-                j++;
-            }
-
-        }
-
-        return inversionCount;
+        this.mergeSort([...arr], 0, n - 1);
+        return this.count;
     }
 }
-let arr = "468 335 1 170 225 479 359 463 465 206 146 282 328 462 492 496 443 328 437 392 105 403 154 293 383 422 217 219 396 448 227 272 39 370 413 168 300 36 395 204 312 323".split(' ');
+let arr = [2, 4, 1, 3, 5];
 let sol = new Solution();
 console.log(sol.inversionCount(arr, arr.length));
