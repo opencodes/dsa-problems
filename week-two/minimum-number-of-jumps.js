@@ -1,4 +1,27 @@
 class Solution {
+
+    findMin (arr, start, end) {
+        let max = 0;
+        let maxIndex = start;
+        if (start == end) {
+            console.log("===========>", start, end, arr[start]);
+            return 1;
+        }
+        if (end > arr.length) {
+            console.log("===========>", start, end, arr[start], arr.length - start);
+
+            return arr.length - start + 1;
+        }
+        for (let i = start; i <= end; i++) {
+            let nextIndex = arr[i] + (i - start + 1);
+            if (nextIndex > max) {
+                max = nextIndex;
+                maxIndex = i;
+            }
+        }
+        console.log("===========>", start, end, arr[start], arr.length - start);
+        return maxIndex - start + 1;
+    }
     minJumps (arr, n) {
         let i = 0;
         let steps = 0;
@@ -6,7 +29,7 @@ class Solution {
             if (arr[i] == 0) {
                 steps = -1;
             } else {
-                i += arr[i] || n - i;
+                i += this.findMin(arr, i, arr[i] + i);
                 steps++
             }
         }
