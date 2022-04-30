@@ -4,13 +4,13 @@ class Solution {
         let max = 0;
         let maxIndex = start;
         if (start == end) {
-            console.log("===========>", start, end, arr[start]);
+            console.log("===========> eq ", start, end, arr[start]);
             return 1;
         }
         if (end > arr.length) {
-            console.log("===========>", start, end, arr[start], arr.length - start);
+            console.log("===========> >n ", start, end, arr[start], 'Jump', arr.length - start);
 
-            return arr.length - start + 1;
+            return arr.length - start;
         }
         for (let i = start; i <= end; i++) {
             let nextIndex = arr[i] + (i - start + 1);
@@ -19,8 +19,8 @@ class Solution {
                 maxIndex = i;
             }
         }
-        console.log("===========>", start, end, arr[start], arr.length - start);
-        return maxIndex - start + 1;
+        console.log("===========>", start, end, arr[start], 'Jump', maxIndex - start);
+        return maxIndex - start;
     }
     minJumps (arr, n) {
         let i = 0;
