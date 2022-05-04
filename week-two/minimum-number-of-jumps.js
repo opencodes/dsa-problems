@@ -1,42 +1,34 @@
 class Solution {
+    minJumps (nums, n) {
+        let maxR = nums[0];
+        let jump = 1;
+        let step = nums[0];
+        if (n == 1) {
+            return 0;
+        } else if (nums[0] == 0) {
+            return -1;
+        } else {
+            for (let i = 1; i < n; i++) {
+                if (i == n - 1) {
+                    return jump;
+                }
+                maxR = Math.max(maxR, i + nums[i])
+                step--;
+                if (step == 0) {
+                    jump++;
 
-    findMin (arr, start, end) {
-        let max = 0;
-        let maxIndex = start;
-        if (start == end) {
-            console.log("===========> eq ", start, end, arr[start]);
-            return 1;
-        }
-        if (end > arr.length) {
-            console.log("===========> >n ", start, end, arr[start], 'Jump', arr.length - start);
-
-            return arr.length - start;
-        }
-        for (let i = start; i <= end; i++) {
-            let nextIndex = arr[i] + (i - start + 1);
-            if (nextIndex > max) {
-                max = nextIndex;
-                maxIndex = i;
+                    if (i >= maxR) {
+                        return -1;
+                    }
+                    step = maxR - i;
+                    console.log(jump, 'at >', nums[i]);
+                }
             }
         }
-        console.log("===========>", start, end, arr[start], 'Jump', maxIndex - start);
-        return maxIndex - start;
-    }
-    minJumps (arr, n) {
-        let i = 0;
-        let steps = 0;
-        while (i < n) {
-            if (arr[i] == 0) {
-                steps = -1;
-            } else {
-                i += this.findMin(arr, i, arr[i] + i);
-                steps++
-            }
-        }
-        return steps;
+
     }
 }
-let arr1 = [1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9];
+let arr1 = [2, 3, 1, 1, 2, 4, 2, 0, 1, 1];
 // A[0] * B[0] + A[1] * B[1] +…+ A[N-1] * B[N-1]
 let sol = new Solution();
-console.log(sol.minJumps(arr1, 11)); 
+console.log(sol.minJumps(arr1, arr1.length)); 
