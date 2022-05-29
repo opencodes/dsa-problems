@@ -18,7 +18,6 @@ class Solution {
     topoSort (N, adj) {
         let st = [];
         let vis = adj.map(k => 0);
-        // console.log(adj)
         for (let i = 0; i < N; i++) {
             if (vis[i] == 0) {
                 this.findTopoSort(i, vis, adj, st);
@@ -29,14 +28,36 @@ class Solution {
         while (st.length) {
             topo[ind++] = st.pop();
         }
-        // for(int i = 0;i<N;i++) System.out.println(topo[i] + " "); 
         return topo;
     }
+
+    findOrder (dict, N, K) {
+        let adj = {};
+        for (let i = 1; i < dict.length; i++) {
+
+            const word1 = dict[i - 1];
+            const word2 = dict[i];
+
+            for (let k = 0; k < Math.min(word1.length, word2.length); k++) {
+                if (!adj[word1[k]]) {
+                    adj[word1[k]] = []
+                } else {
+                    if (adj[word1[k].includes()]) {
+
+                    }
+                }
+
+
+            }
+        }
+        console.log(this.topoSort(N, adj));
+    }
+
 }
 
 let sol = new Solution();
-// 0 : []
-// 1 :[0]
-// 2 :[0]
-// 3 :[0]
-console.log(sol.topoSort(6, [[], [], [3], [1], [0, 1], [0, 2]]));
+let N = 5,
+    K = 4,
+    dictArr = ["baa", "abcd", "abca", "cab", "cad"];
+
+console.log(sol.findOrder(dictArr, N, K));
