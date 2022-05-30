@@ -19,7 +19,6 @@ class Solution {
     run (arr) {
         let maxSubArrayLength = 0;
         let currPeakLength = 0;
-
         for (let i = 1; i < arr.length - 1; i++) {
             const curr = arr[i];
             const left = arr[i - 1];
